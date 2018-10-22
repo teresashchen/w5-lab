@@ -3,27 +3,34 @@ title             : "Vowel Space"
 shorttitle        : "SKY"
 
 author: 
-  - name          : "First Author"
-    affiliation   : "1"
+  - name          : "Teresa Chen"
+    affiliation   : "3"
     corresponding : yes    # Define only one corresponding author
-    address       : "Postal address"
-    email         : "my@email.com"
-  - name          : "Ernst-August Doelle"
-    affiliation   : "1,2"
+    address       : "Rm.52 Gerlnger Annex, University of Oregon, OR 97403"
+    email         : "szuhuac@uoregon.edu"
+  - name          : "Jun Lun"
+    affiliation   : "2"
+  - name          : "Steffi Hung"
+    affiliation   : "2"
+  - name          : "Ting-fen Lin"
+    affiliation   : "1"
 
 affiliation:
   - id            : "1"
-    institution   : "Wilhelm-Wundt-University"
+    institution   : "Department of Human Physiology"
   - id            : "2"
-    institution   : "Konstanz Business School"
+    institution   : "Department of East Asia Linguistic Language"
+  - id            : "3"
+    institution   : "Department of Communication Disorder"
+    
 
 
 abstract: |
-  This is an abstract
+  This is an abstract.
   
   <!-- https://tinyurl.com/ybremelq -->
   
-keywords          : "vowel","Mandarin"
+keywords          : "vowel, Mandarin"
 
 bibliography      : ["r-references.bib"]
 
@@ -41,6 +48,24 @@ output            : papaja::apa6_pdf
 
 ```{r setup, include = FALSE}
 library("papaja")
+library("tidyverse")
+library("rio")
+library("here")
+library("janitor")
+library("ggplot2")
+library("skimr")
+knitr::opts_chunk$set(warning = FALSE,
+                      message = FALSE,
+                      error = TRUE,
+                      fig.width = 6.5,
+                      fig.height = 8
+                      )
+theme_set(theme_minimal(base_size = 8))
+```
+
+```{r load_data}
+df <- import(here("data", "star.csv"),
+                   setclass = "tbl_df")
 ```
 
 ```{r analysis-preferences}
