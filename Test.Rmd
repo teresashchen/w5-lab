@@ -90,6 +90,16 @@ We used `r cite_r("r-references.bib")` for all our analyses.
 
 
 # Results
+```{r}
+head(df)
+df %>% 
+  group_by(sex, frl, tmathss, treadss) %>% 
+  summarize(mean = mean(tmathss), 
+            sd = sd(tmathss),
+            mean = mean(treadss),
+            sd = sd(treadss)) %>% 
+  knitr::kable(format = "latex")
+```
 
 # Discussion
 
