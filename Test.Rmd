@@ -32,7 +32,7 @@ abstract: |
   
 keywords          : "vowel, Mandarin"
 
-bibliography      : ["r-references.bib"]
+bibliography      : ["references.bib"]
 
 floatsintext      : no
 figurelist        : no
@@ -86,7 +86,7 @@ We report how we determined our sample size, all data exclusions (if any), all m
 ## Procedure
 
 ## Data analysis
-We used `r cite_r("r-references.bib")` for all our analyses.
+We used `r cite_r("references.bib")` for all our analyses.
 
 
 # Results
@@ -102,14 +102,16 @@ df %>%
 ```
 
 # Discussion
+Vowel space is complex (see @logemann1998evaluation)
+@munro1996effects reported that vowel space and language acquisition are closely related 
+
 
 
 \newpage
 
 # References
-```{r create_r-references}
-r_refs(file = "r-references.bib")
-```
+
+
 
 \begingroup
 \setlength{\parindent}{-0.5in}
