@@ -1,6 +1,6 @@
 ---
-title             : "Vowel Space"
-shorttitle        : "SKY"
+title             : "Lab 8"
+shorttitle        : "This is the assigment of lab 8"
 
 author: 
   - name          : "Teresa Chen"
@@ -28,9 +28,9 @@ affiliation:
 abstract: |
   This is an abstract.
   
-  <!-- https://tinyurl.com/ybremelq -->
+ 
   
-keywords          : "vowel, Mandarin"
+keywords          : "math, reading, free lunch"
 
 bibliography      : ["references.bib"]
 
@@ -54,6 +54,8 @@ library("here")
 library("janitor")
 library("ggplot2")
 library("skimr")
+library("knitr")
+library("kableExtra")
 knitr::opts_chunk$set(warning = FALSE,
                       message = FALSE,
                       error = TRUE,
@@ -68,16 +70,8 @@ df <- import(here("data", "star.csv"),
                    setclass = "tbl_df")
 ```
 
-```{r analysis-preferences}
-# Seed for random number generation
-set.seed(42)
-knitr::opts_chunk$set(cache.extra = knitr::rand_seed)
-```
-
-
 
 # Methods
-We report how we determined our sample size, all data exclusions (if any), all manipulations, and all measures in the study. <!-- 21-word solution (Simmons, Nelson & Simonsohn, 2012; retrieved from http://ssrn.com/abstract=2160588) -->
 
 ## Participants
 
@@ -86,20 +80,38 @@ We report how we determined our sample size, all data exclusions (if any), all m
 ## Procedure
 
 ## Data analysis
-We used `r cite_r("references.bib")` for all our analyses.
-
 
 # Results
-```{r}
-head(df)
+```{r commit 3, results='asis'}
+
 df %>% 
-  group_by(sex, frl, tmathss, treadss) %>% 
-  summarize(mean = mean(tmathss), 
-            sd = sd(tmathss),
-            mean = mean(treadss),
-            sd = sd(treadss)) %>% 
-  knitr::kable(format = "latex")
+  group_by(sex, frl) %>% 
+  summarize(math_mean = mean(tmathss), 
+            math_sd = sd(tmathss),
+            rdg_mean = mean(treadss),
+            rdg_sd = sd(treadss)) %>% 
+  kable(format = "latex", digits = 2, booktabs = T)
+  
+  
 ```
+
+```{r figure}
+df %>% 
+  ggplot(aes(x = totexp, y = tmathss)) +
+   geom_point(color = "gray50") +
+    geom_smooth(aes(color = frl), method = lm) +
+    labs(x = "Teacher Experience (years)",
+         y = "Total Math Scale Score",
+         title = "Relation between teacher experience and math scores",
+         subtitle = "Separate regression lines displayed by free/redued price lunch status"
+    ) +
+    scale_color_discrete(name = "Lunch status",
+                         breaks = c("yes", "no"),
+                       labels = c("Free/Reduced Price Meals","Paid Meals")) +
+  theme(legend.position = "bottom")
+
+```
+According to the figure, teachers' experience does not play an important role on students' math performance but students' social economic status (SES) does. Student with a lower SES status, indicated by having a free/reduced lunch, has a lower math score compared to those who have high SES status. 
 
 # Discussion
 Vowel space is complex (see @logemann1998evaluation)
