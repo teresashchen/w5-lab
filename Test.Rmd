@@ -62,7 +62,10 @@ knitr::opts_chunk$set(warning = FALSE,
                       fig.width = 6.5,
                       fig.height = 8
                       )
-theme_set(theme_minimal(base_size = 8))
+# I would not change the base size to lower here. The default is generally
+# okay, and if you're going to change it I would usually advocate for going
+# larger, rather than smaller
+theme_set(theme_minimal(base_size = 8)) 
 ```
 
 ```{r load_data}
@@ -82,20 +85,21 @@ df <- import(here("data", "star.csv"),
 ## Data analysis
 
 # Results
-```{r commit 3, results='asis'}
 
+```{r results='asis'}
 df %>% 
   group_by(sex, frl) %>% 
   summarize(math_mean = mean(tmathss), 
             math_sd = sd(tmathss),
             rdg_mean = mean(treadss),
             rdg_sd = sd(treadss)) %>% 
-  kable(format = "latex", digits = 2, booktabs = T)
-  
-  
+  kable(format = "latex", 
+        digits = 2, 
+        booktabs = TRUE,
+        caption = "My amazing table")
 ```
 
-```{r figure}
+```{r figure, fig.cap="Look how beautiful!"}
 df %>% 
   ggplot(aes(x = totexp, y = tmathss)) +
    geom_point(color = "gray50") +
@@ -111,6 +115,7 @@ df %>%
   theme(legend.position = "bottom")
 
 ```
+
 According to the figure, teachers' experience does not play an important role on students' math performance but students' social economic status (SES) does. Student with a lower SES status, indicated by having a free/reduced lunch, has a lower math score compared to those who have high SES status. 
 
 # Discussion
